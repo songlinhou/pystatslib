@@ -433,7 +433,8 @@ class HT:
                 print("CLT not applicable.")
             print("2) check for normally distributed of each population")
             for id,seq in enumerate(list_seqs):
-                plt.hist(seq,label=f'seq{id+1}')
+                plt.hist(seq,label=f'seq{id+1}',alpha=0.6)
+            plt.legend()
             plt.show()
             print("3) check for closeness of standard deviations")
             sds = np.array([np.std(s,ddof=1) for s in list_seqs])
