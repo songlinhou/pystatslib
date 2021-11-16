@@ -309,15 +309,17 @@ class HT:
         print('0 exist in the CI?')
         print(f'CI with {conf} confidence level = ', ci)
 
-    def two_means_independent_unpooled(self, mu1, mu2, sd1, sd2, n1, n2, alpha=0.05):
+    def two_means_independent_unpooled(self, mu1, mu2, sd1, sd2, n1, n2, one_side=False, alpha=0.05):
         dof = np.min([n1-1, n2-1])
         se = np.sqrt(sd1**2 / n1 + sd2**2 / n2)
         # se = 11.8831
         t = abs((mu1 - mu2) / se) # pay attention here
         print('dof=', dof)
         print('t-value=', t, 'se=', se)
-        p_val = (1 - st.t.cdf(t, df = dof)) * 2 # if two sides
-        # p_val = (1 - st.t.cdf(t, df = dof))  # if one sides
+        if one_side:
+            p_val = (1 - st.t.cdf(t, df = dof))  # if one sides
+        else:
+            p_val = (1 - st.t.cdf(t, df = dof)) * 2 # if two sides
         print(f'reject if p_value {p_val} < alpha {alpha}')
         if p_val < alpha:
             print('Reject!')
@@ -331,15 +333,18 @@ class HT:
         print('0 exist in the CI?')
         print(f'CI with {conf} confidence level = ', ci)
 
-    def two_means_independent_pooled(self, mu1, mu2, sd1, sd2, n1, n2, alpha=0.05):
+    def two_means_independent_pooled(self, mu1, mu2, sd1, sd2, n1, n2, one_side=False, alpha=0.05):
         dof = n1 + n2 - 2
         sp = np.sqrt(((n1 - 1) * sd1**2 + (n2 - 1) * sd2**2)/(n1 + n2 - 2))
         se = sp * np.sqrt(1/n1 + 1/n2)
         t = abs((mu1 - mu2) / se) # pay attention here
         print('dof=', dof)
         print('t-value=', t, 'se=', se)
-        p_val = (1 - st.t.cdf(t, df = dof)) * 2 # if two sides
-        # p_val = (1 - st.t.cdf(t, df = dof))  # if one sides
+        if one_side:
+            p_val = (1 - st.t.cdf(t, df = dof))  # if one sides
+        else:
+            p_val = (1 - st.t.cdf(t, df = dof)) * 2 # if two sides
+ 
         print(f'reject if p_value {p_val} < alpha {alpha}')
         if p_val < alpha:
             print('Reject!')
