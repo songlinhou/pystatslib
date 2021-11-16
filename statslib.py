@@ -421,7 +421,7 @@ class HT:
         return self.chi_squared_homogeneity(df, alpha)
 
 
-    def ANOVA_means_of_multi_sequences(self,list_seqs, check_for_requirements=True, alpha=0.5):
+    def ANOVA_means_of_multi_sequences(self,list_seqs, check_for_requirements=True, alpha=0.05):
         """
         test at least one pair of seqs is different in means
         """
