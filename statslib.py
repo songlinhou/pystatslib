@@ -429,6 +429,8 @@ class HT:
             print("1) check if sample size large enough")
             if np.min([len(s) for s in list_seqs]) >= 30:
                 print("CLT applicable")
+            else:
+                print("CLT not applicable.")
             print("2) check for normally distributed of each population")
             for id,seq in enumerate(list_seqs):
                 plt.hist(seq,label=f'seq{id+1}')
